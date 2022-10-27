@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Crypto Duckies Migration" />
+    <title>Crypto Duckies - Mint GAN Duckies</title>
+
+    <link rel="stylesheet" type="text/css" href="dist/css/main.css">
+
+</head>
+
+<body>
+
+  <div class="page-container">
+
+    <div class="grouped">
+      <style>
+        @media only screen and (min-width: 1000px) {
+          .grouped {
+            display:flex;
+          }
+        }
+      </style>
+
+      <div id="introBlock">
+
+        <div class="header">
+
+          <div class="container container--flex container--flex-ch container--large">
+
+            <a href="https://cryptoduckies.co" class="header__logo">Crypto Duckies
+
+            <div class="header__socials">
+
+              <a
+                href="https://discord.gg/jn35YkYEjj"
+                target="_blank"
+                class="button button--round button--icon"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M6.552 6.712c-.456 0-.816.4-.816.888s.368.888.816.888c.456 0 .816-.4.816-.888.008-.488-.36-.888-.816-.888zm2.92 0c-.456 0-.816.4-.816.888s.368.888.816.888c.456 0 .816-.4.816-.888s-.36-.888-.816-.888z"
+                  />
+                  <path
+                    d="M13.36 0H2.64C1.736 0 1 .736 1 1.648v10.816c0 .912.736 1.648 1.64 1.648h9.072l-.424-1.48 1.024.952.968.896L15 16V1.648C15 .736 14.264 0 13.36 0zm-3.088 10.448s-.288-.344-.528-.648c1.048-.296 1.448-.952 1.448-.952-.328.216-.64.368-.92.472-.4.168-.784.28-1.16.344a5.604 5.604 0 0 1-2.072-.008 6.716 6.716 0 0 1-1.176-.344 4.688 4.688 0 0 1-.584-.272c-.024-.016-.048-.024-.072-.04-.016-.008-.024-.016-.032-.024-.144-.08-.224-.136-.224-.136s.384.64 1.4.944c-.24.304-.536.664-.536.664-1.768-.056-2.44-1.216-2.44-1.216 0-2.576 1.152-4.664 1.152-4.664 1.152-.864 2.248-.84 2.248-.84l.08.096c-1.44.416-2.104 1.048-2.104 1.048s.176-.096.472-.232c.856-.376 1.536-.48 1.816-.504.048-.008.088-.016.136-.016a6.521 6.521 0 0 1 4.024.752s-.632-.6-1.992-1.016l.112-.128s1.096-.024 2.248.84c0 0 1.152 2.088 1.152 4.664 0 0-.68 1.16-2.448 1.216z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero">
+
+          <div class="container container--large">
+            <h1 class="hero__title page-title">
+              Mint your <span>FREE</span><br />
+              GAN Duckies
+            </h1>
+          </div>
+          <div class="container">
+            <div class="hero__content" style="color: white; opacity: 0.6; max-width: 700px;">
+              <p>Every Duckie holder that has <a href="https://migrate.cryptoduckies.co" target="_blank">migrated their Duckie</a> has the ability to claim FREE complementary GANitized Crypto Duckies, which will be uniquely based on your own duckies. Connect your wallet and start minting!</p>
+            </div>
+            <div class="hero__button-group">
+              <button class="button" id="btn-connect">Connect wallet</button>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="migrationBlock" style="display:none;">
+
+        <!-- mint check -->
+        <section class="section section--padding section--black migration-form" style="background-color: #181818;">
+          <div class="container">
+            <h2 class="title title--h2">Mint Check</h2>
+            <small>ⓘ Check if the GAN Duckie has already been redeemed <br> </small>
+
+            <label>
+              <input class="input" type="text" id="inputCheckMinted" placeholder="56 (only one at a time)">
+              <button class="button button--outline-white"onclick="checkMinted()">Check</button>
+            </label>
+          </div>
+        </section>
+
+        <!-- mint one duckie -->
+        <section class="section section--padding section--black migration-form" style="background-color: #2b2b2b;">
+          <div class="container">
+            <h2 class="title title--h2">Mint <span>one GAN Duckie</span></h2>
+            <small>ⓘ Fill in your Duckie number without the # (example: 38).<br>ⓘ If you are not the owner of the Duckie # below, or the GAN Duckie is already minted, the transaction will fail, leading to a potential loss in gas fees.</small>
+
+            <label>
+              <input class="input" type="text" id="inputMigrateSingle" placeholder="475">
+              <button class="button button--outline-white" onclick="mint()">Mint</button>
+            </label>
+          </div>
+        </section>
+
+        <!-- mint multiple duckies -->
+        <section class="section section--padding section--black migration-form" style="background-color: #181818;">
+          <div class="container">
+            <h2 class="title title--h2">Mint <span>multiple GAN Duckies</span></h2>
+            <small>ⓘ Fill in your Duckie numbers without the # and separate them by a comma (example: 353,326,2).
+              <br>ⓘ If you are not the owner of the Duckie # below, or the GAN Duckie is already minted, the transaction will fail, leading to a potential loss in gas fees.</small>
+
+            <label>
+              <input class="input" type="text" id="inputMigrateFlock" placeholder="56,79,98">
+              <button class="button button--outline-white"onclick="mintMultiple()">Mint all</button>
+            </label>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <div class="duckie-marquee">
+      <div class="duckie-marquee__container">
+        <img src="./dist/img/1.jpg" />
+        <img src="./dist/img/2.jpg" />
+        <img src="./dist/img/3.jpg" />
+        <img src="./dist/img/4.jpg" />
+        <img src="./dist/img/5.jpg" />
+        <img src="./dist/img/7.jpg" />
+        <img src="./dist/img/8.jpg" />
+        <img src="./dist/img/6.jpg" />
+        <img src="./dist/img/9.jpg" />
+        <img src="./dist/img/10.jpg" />
+        <img src="./dist/img/11.jpg" />
+        <img src="./dist/img/12.jpg" />
+      </div>
+      <div class="duckie-marquee__container">
+        <img src="./dist/img/1.jpg" />
+        <img src="./dist/img/2.jpg" />
+        <img src="./dist/img/3.jpg" />
+        <img src="./dist/img/4.jpg" />
+        <img src="./dist/img/5.jpg" />
+        <img src="./dist/img/7.jpg" />
+        <img src="./dist/img/8.jpg" />
+        <img src="./dist/img/6.jpg" />
+        <img src="./dist/img/9.jpg" />
+        <img src="./dist/img/10.jpg" />
+        <img src="./dist/img/11.jpg" />
+        <img src="./dist/img/12.jpg" />
+      </div>
+    </div>
+
+    <section class="section section--padding section--yellow migration">
+      <div class="container">
+        <div class="grid">
+          <div>
+            <div class="rte">
+
+              <h2 class="title title--h2">How can I mint a GAN Duckie?</h2>
+              <p>In order to mint a GAN Duckie you have to have a Duckie in your wallet that is migrated to the onchain collection.</p>
+
+              <h2 class="title title--h2">Why does MetaMask show an enormously high gas price for the transaction?</h2>
+              <p>There are a few reasons why MetaMask will show you high gas prices: 1. You don't have enough funds on your wallet, 2. You are not the owner of the Duckie, 3. The GAN version of your Duckie has already been minted by the previous owner. </p>
+
+              <h2 class="title title--h2">What does it cost? </h2>
+              <p>Minting a GAN Duckie is free, you only have to pay a bit of gas.</p>
+
+              <h2 class="title title--h2">My Wallet doesn't connect?</h2>
+              <p>If you can't connect your wallet join our Discord and ping one of the online mods, we’ll be happy to help.</p>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="spinner" style="display:none">
+    <div class="spinner spinner--style1" title="0">
+      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+        <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946 s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634 c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+        <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+
+  <script>
+  const loader = document.querySelector('.spinner');
+  const approveBlock = document.querySelector('#approveBlock');
+  const migrationBlock = document.querySelector('#migrationBlock');
+  const connectButton = document.querySelector('.btn-connect');
+
+
+  const contractLocation = {chainId: 1, address: "0x6e5b753a14b40fcb458b6cca5a4ce5e0a848ad4b"}; // chainId 4 is Rinkeby, change to chainId 1 for Mainnet
+  const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseTokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"canMint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"emergencyMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"flipMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isSealed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenIds","type":"uint256[]"}],"name":"mintMultiple","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"seal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+
+
+  const Web3Modal = window.Web3Modal.default;
+  const WalletConnectProvider = window.WalletConnectProvider.default;
+  const Fortmatic = window.Fortmatic;
+  const evmChains = window.evmChains;
+
+  let web3;
+  let web3Modal
+  let provider;
+
+  let contract;
+
+  let currentAccount = null
+  let approve = false;
+
+
+  // --------------------------------------------------------------
+  // Contract functions
+
+  function mint() {
+    let duckieID = document.getElementById("inputMigrateSingle").value | 0;
+
+    const options = {
+      from: currentAccount
+    }
+
+    // show loader
+    loader.style.display = 'flex';
+
+    // contract function
+    contract.methods.mint(duckieID)
+    .send(options)
+    .then(result => {
+      console.log(result);
+
+      Swal.fire({
+        title: 'Minted!',
+        text: 'Congratulations with your GAN Duckie! It will show up soon in your wallet.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+
+      // hide loader
+      loader.style.display = 'none';
+    }).catch(error => {
+      if (error.code === 4001) {
+        // User rejected transaction
+        console.error("Rejected transaction");
+      }
+      else {
+        console.error('oops', error);
+
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wrong, please try again or contact us',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+      // hide loader
+      loader.style.display = 'none';
+    });
+  }
+
+  function mintMultiple() {
+    const gasPrice = web3.eth.getGasPrice();
+    let getIds = document.getElementById("inputMigrateFlock").value;
+    var newArray = getIds.split(',');
+
+    // change to integers
+    var intArray = newArray.map(function (x) {
+        return parseInt(x, 10);
+    });
+
+    // remove none numbers
+    var duckieIds = intArray.filter(function (value) {
+        return !Number.isNaN(value);
+    });
+
+    console.log(duckieIds)
+
+    const options = {
+      from: currentAccount,
+    }
+
+    // show loader
+    loader.style.display = 'flex';
+
+    // contract function
+    contract.methods.mintMultiple(duckieIds)
+    .send(options)
+    .then(result => {
+      console.log(result);
+
+      Swal.fire({
+        title: 'Minted!',
+        text: 'Congratulations on a successful mint! They will show up soon in your wallet.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+
+      // hide loader
+      loader.style.display = 'none';
+    }).catch(error => {
+      if (error.code === 4001) {
+        // User rejected transaction
+        console.error("Rejected transaction");
+      }
+      else {
+        console.error('oops', error);
+
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wrong, please try again or contact us',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+      // hide loader
+      loader.style.display = 'none';
+    });
+
+  }
+
+  function checkMinted() {
+
+    tokenId = document.getElementById("inputCheckMinted").value;
+
+    contract.methods.ownerOf(tokenId).call().then(result => {
+      console.log('found');
+      Swal.fire({
+          title: 'Already minted!',
+          text: 'The GAN version of this Duckie has already been minted.',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+      })
+
+    }).catch(error => {
+      console.error('oops', error);
+      Swal.fire({
+        title: 'Not yet minted!',
+        text: 'The GAN version of this Duckie has not yet been minted.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+    });
+
+  };
+
+
+  window.addEventListener('load', function() {
+      console.log("LOAD EVENT");
+      // Modern dapp browsers...
+      if (window.ethereum) {
+          let web3 = new Web3(ethereum);
+          window.web3 = web3;
+      }
+      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+      else if (typeof web3 !== 'undefined') {
+          // Use Mist/MetaMask's provider
+          console.log("- Found web3");
+          // window.web3 = new Web3(web3.currentProvider);
+          let web3 = new Web3(web3.currentProvider);
+          window.web3 = web3;
+      } else {
+          window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/de6285712e0749bdb5439fe5cb6da040"));
+      }
+
+      contract = new web3.eth.Contract(contractABI, contractLocation.address);
+
+  });
+
+
+
+
+  // --------------------------------------------------------------
+  // Wallet connect functions
+
+  function init() {
+    const providerOptions = {
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          infuraId: "de6285712e0749bdb5439fe5cb6da040",
+        }
+      }
+    };
+
+    web3Modal = new Web3Modal({
+      cacheProvider: false, // optional
+      providerOptions, // required
+      disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+    });
+
+    console.log("Web3Modal instance is", web3Modal);
+  }
+
+  async function fetchAccountData() {
+    web3 = new Web3(provider);
+    contract = new web3.eth.Contract(contractABI, contractLocation.address);
+
+    const chainId = await web3.eth.getChainId();
+    const chainData = evmChains.getChain(chainId);
+    const accounts = await web3.eth.getAccounts();
+
+    //console.log("Got accounts", accounts);
+    currentAccount = accounts[0];
+    console.log(currentAccount);
+
+    document.querySelector("#btn-connect").textContent = currentAccount;
+    migrationBlock.style.display = 'block';
+  }
+
+  async function refreshAccountData() {
+    document.querySelector("#btn-connect").setAttribute("disabled", "disabled")
+    await fetchAccountData(provider);
+    document.querySelector("#btn-connect").removeAttribute("disabled")
+  }
+
+  async function onConnect() {
+
+    try {
+      provider = await web3Modal.connect();
+    } catch(e) {
+      console.log("Could not get a wallet connection", e);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Could not get a wallet connection',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+      return;
+    }
+
+    // Subscribe to accounts change
+    provider.on("accountsChanged", (accounts) => {
+      fetchAccountData();
+      console.log(accounts);
+    });
+
+    // Subscribe to chainId change
+    provider.on("chainChanged", (chainId) => {
+      fetchAccountData();
+    });
+
+    // Subscribe to networkId change
+    provider.on("networkChanged", (networkId) => {
+      fetchAccountData();
+    });
+
+    await refreshAccountData();
+  }
+
+  window.addEventListener('load', async () => {
+    init();
+    document.querySelector("#btn-connect").addEventListener("click", onConnect);
+  });
+
+  </script>
+
+  <style>
+  .spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg path,
+  svg rect{
+    fill: #f7d60d;
+  }
+  </style>
+
+</body>
+
+</html>
